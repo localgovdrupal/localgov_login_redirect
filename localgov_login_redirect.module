@@ -10,7 +10,7 @@ use Drupal\Core\Session\AccountInterface;
 /**
  * Implements hook_user_login().
  */
-function localgov_login_redirect_user_login(AccountInterface $account) {
+function localgov_login_redirect_user_login(AccountInterface $account): void {
 
   // Check login redirect is enabled.
   $config = \Drupal::configFactory()->get('localgov_login_redirect.settings');

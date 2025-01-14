@@ -29,7 +29,7 @@ class LoginRedirectTest extends BrowserTestBase {
   /**
    * Test redirect at login.
    */
-  public function testRedirectAtLogin() {
+  public function testRedirectAtLogin(): void {
 
     // Check user with no permissions lands on default user login page.
     $user1 = $this->drupalCreateUser([]);

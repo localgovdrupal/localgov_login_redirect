@@ -36,7 +36,7 @@ class LoginRedirectSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): static {
     return new static(
       $container->get('config.factory'),
       $container->get('path.validator')
@@ -46,21 +46,21 @@ class LoginRedirectSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'localgov_login_redirect_settings_form';
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getEditableConfigNames() {
+  protected function getEditableConfigNames(): array {
     return ['localgov_login_redirect.settings'];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
 
     $form = parent::buildForm($form, $form_state);
     $config = $this->config('localgov_login_redirect.settings');
@@ -84,7 +84,7 @@ class LoginRedirectSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
+  public function validateForm(array &$form, FormStateInterface $form_state): void {
     parent::validateForm($form, $form_state);
 
     $redirect_path = $form_state->getValue('redirect_path');
@@ -96,7 +96,7 @@ class LoginRedirectSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
 
     $config = $this->config('localgov_login_redirect.settings');
     $config->set('enabled', $form_state->getValue('enabled') === 1);
