@@ -3,6 +3,7 @@
 namespace Drupal\localgov_login_redirect\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Path\PathValidator;
@@ -25,11 +26,13 @@ class LoginRedirectSettingsForm extends ConfigFormBase {
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typed_config_manager
+   *   The typed config manager.
    * @param \Drupal\Core\Path\PathValidator $path_validator
    *   The route provider.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, PathValidator $path_validator) {
-    parent::__construct($config_factory);
+  public function __construct(ConfigFactoryInterface $config_factory, TypedConfigManagerInterface $typed_config_manager, PathValidator $path_validator) {
+    parent::__construct($config_factory, $typed_config_manager);
     $this->pathValidator = $path_validator;
   }
 
@@ -39,6 +42,7 @@ class LoginRedirectSettingsForm extends ConfigFormBase {
   public static function create(ContainerInterface $container): static {
     return new static(
       $container->get('config.factory'),
+      $container->get('config.typed'),
       $container->get('path.validator')
     );
   }
